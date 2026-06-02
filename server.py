@@ -37,6 +37,17 @@ def get_user_info():
     }
     return user_info
 
+# ---- Coupons -----
+@app.route("/api/coupons", methods=["GET"])
+def get_coupons():
+    coupons = [
+        {"_id": 1, "code": "WELCOME10", "discount": 10},
+        {"_id": 2, "code": "SPOOKY25", "discount": 25},
+            {"_id": 3, "code": "VIP50", "discount": 50}
+    ]
+    return coupons
+    
+
 if __name__== "__main__": 
     app.run(debug=True)
     # when this file is run directly: __name__ == "__main__"

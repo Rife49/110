@@ -1,4 +1,6 @@
-from flask import Flask
+from http import HTTPStatus
+
+from flask import Flask, jsonify
 
 app = Flask(__name__) # Instance of Flask
 
@@ -38,14 +40,20 @@ def get_user_info():
     return user_info
 
 # ---- Coupons -----
+coupons = [
+    {"_id": 1, "code": "WELCOME10", "discount": 10},
+    {"_id": 2, "code": "SPOOKY25", "discount": 25},
+    {"_id": 3, "code": "VIP50", "discount": 50}
+]
+
 @app.route("/api/coupons", methods=["GET"])
 def get_coupons():
-    coupons = [
-        {"_id": 1, "code": "WELCOME10", "discount": 10},
-        {"_id": 2, "code": "SPOOKY25", "discount": 25},
-            {"_id": 3, "code": "VIP50", "discount": 50}
-    ]
-    return coupons
+    return coupons, HTTPStatus.OK
+
+@app.route("/api/coupons/count", methods=["GET"])
+def get_coupons_count():
+    coupons_counter = len(coupons)
+    return jsonify({"coupons-counter": coupons_counter}), HTTPStatus.OK
     
 
 if __name__== "__main__": 
